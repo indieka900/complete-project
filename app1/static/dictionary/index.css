@@ -1,0 +1,64 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #1d1e2c;
+}
+
+h3 {
+    color: aquamarine;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 13px;
+}
+
+.spin-loading {
+    height: 70px;
+    width: 70px;
+    border: 6px solid #3fc1c936;
+    display: inline-block;
+    border: 50%;
+    border-top-color: #FC5185;
+    animation: 1.5s spin infinite ease-in-out;
+}
+
+.dot-loading {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32px;
+}
+
+.dot-loading>div {
+    height: 24px;
+    width: 24px;
+    background: #FC5185;
+    border-radius: 50%;
+    animation: 1.5s bounce infinite ease-in-out;
+}
+
+.dot-loading .dot2 {
+    animation-delay: 150ms;
+}
+
+.dot-loading .dot3 {
+    animation-delay: 300ms;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes bounce {
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+        background: #3fd;
+    }
+    40% {
+        background: #FC5185;
+        transform: scale(1);
+    }
+}

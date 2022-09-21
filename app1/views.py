@@ -1,0 +1,66 @@
+from django.shortcuts import render,redirect
+from django.contrib import messages
+from django.contrib.auth.models import User
+from .forms import CustomUserCreationForm
+from django.contrib.auth import authenticate, login, logout
+#from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+#from . import forms
+
+
+def log_in(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username').lower()
+            password = request.POST.get('password')
+            
+            try:
+                user= User.objects.get(username=username)
+            except:
+                messages.error(request, 'Username does not exists!') 
+            
+            user = authenticate(request, username=username, password=password)
+            
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.error(request, 'Username or password does not exists')
+        return render(request,"app1/log_in.html")
+
+def log_out(request):
+     logout(request)
+     return redirect('index1')
+ 
+@login_required(login_url='/login')
+def home(request):
+    
+     return render(request, 'app1/home.html')
+def index(request):
+    return render(request, "app1/index.html")
+
+def signup(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        if request.method == 'POST':
+            f = CustomUserCreationForm(request.POST)
+            if f.is_valid():
+                f.save()
+                user = f.cleaned_data.get('username')
+                messages.success(request, 'Account was successfully created for ' + user)
+                return redirect('home')
+
+        else:
+            f = CustomUserCreationForm()
+            
+        return render(request, 'app1/signup.html', {'form': f})
+
+@login_required(login_url='/login')
+def about(request):
+    
+    return render(request, "app1/about.html")
+# Create your views here.

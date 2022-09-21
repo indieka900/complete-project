@@ -1,0 +1,52 @@
+{% load static %}
+<html>
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SSCM | Dashboard</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'shortner/index.css' %}">
+        <!-- font awesome v5.15.2 CDN -->
+        {% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" /> {% endcomment %}
+    </head>
+    <body>
+        <div class="all">
+            <h3>
+                URL shortner
+            </h3>
+            <form method="POST" action="" id="post-form">
+                {% csrf_token %}
+                <input type="text" name="url" id="url" placeholder="Enter your URL" required>
+                <br>
+                
+                <button type="submit" name="submit" class="button">
+                    <span class="text">Submit</span>
+                    <i class="ri-check-line icon"></i>
+                </button>
+                <div class="linkk">
+                    <h2>{{uid}}</h2>
+                </div>
+            </form>
+        </div>
+    </body>
+    {% comment %} <script type="text/javascript">
+        $(document).on('submit','#post-form', function(e){
+            e.preventDefault();
+        </script> {% endcomment %}
+{% comment %} 
+            $.ajax({
+                type:'POST',
+                url: 'create/',
+                data:{
+                    url:$('#url').val(),
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+
+                },
+                success: function(data){
+                    $('h2').html("http/"+data)
+
+                }
+            });
+        }); {% endcomment %}
+    
+</html>
