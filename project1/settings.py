@@ -99,6 +99,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CORS_ORIGIN_WHITELIST = ['https://web-production-afc9.up.railway.app',]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
