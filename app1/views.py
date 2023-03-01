@@ -35,7 +35,7 @@ def log_out(request):
      logout(request)
      return redirect('index1')
  
-@login_required(login_url='/login')
+# @login_required(login_url='/login')
 def home(request):
     
      return render(request, 'app1/home.html')
