@@ -43,6 +43,7 @@ def home(request):
 def index(request):
     return render(request, "app1/index.html")
 
+@csrf_exempt
 def signup(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -60,7 +61,7 @@ def signup(request):
             
         return render(request, 'app1/signup.html', {'form': f})
 
-@login_required(login_url='/login')
+
 def about(request):
     
     return render(request, "app1/about.html")
